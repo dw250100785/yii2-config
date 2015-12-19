@@ -1,8 +1,8 @@
 {
-    "name": "callmez/yii2-config",
+    "name": "weyii/yii2-config",
     "description": "The Config components for Yii2.",
-    "keywords": ["yii2", "config"],
-    "homepage": "https://github.com/callmez/yii2-config",
+    "keywords": ["weyii", "yii2", "config"],
+    "homepage": "https://github.com/weyii/yii2-config",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
@@ -12,14 +12,14 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/callmez/yii2-config/issues?state=open",
-        "wiki": "https://github.com/callmez/yii2-config/wiki/",
-        "source": "https://github.com/callmez/yii2-config"
+        "issues": "https://github.com/weyii/yii2-config/issues?state=open",
+        "wiki": "https://github.com/weyii/yii2-config/wiki/",
+        "source": "https://github.com/weyii/yii2-config"
     },
     "require": {
         "yiisoft/yii2": "*"
     },
     "autoload": {
-        "psr-4": {"callmez\\config\\": ""}
+        "psr-4": {"weyii\\config\\": ""}
     }
 }
