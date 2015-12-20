@@ -62,5 +62,5 @@ Yii::$app->config->set('test1.foo.bar', 'world');
 Yii::$app->config->get('test.foo.bar', 'world');
 Yii::$app->config->delete('test1.foo');
 Yii::$app->config->delete('test.foo.bar');
-print_r(Yii::$app->get());
+print_r(Yii::$app->config->get());
 ```

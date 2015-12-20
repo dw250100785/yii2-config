@@ -17,7 +17,9 @@
         "source": "https://github.com/weyii/yii2-config"
     },
     "require": {
-        "yiisoft/yii2": "*"
+        "yiisoft/yii2": "*",
+
+        "weyii/yii2-base": "*"
     },
     "autoload": {
         "psr-4": {"weyii\\config\\": ""}
