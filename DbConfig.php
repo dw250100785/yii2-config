@@ -24,7 +24,47 @@ class DbConfig extends Config
     public function init()
     {
         $this->db = Instance::ensure($this->db, Connection::className());
+        $this->data = array_merge($this->loadData(), $this->data);
+
         parent::init();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function set($key, $value = null)
+    {
+        if (!is_array($key)) {
+            $rootKey = $this->getRootKey($key);
+            $hasRootKey = $this->has($rootKey);
+        } else {
+            $rootKey = false;
+        }
+
+        parent::set($key, $value);
+
+        if ($rootKey) {
+            if ($hasRootKey) {
+                $this->updateData($rootKey);
+            } else {
+                $this->insertData($rootKey);
+            }
+        }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function delete($key)
+    {
+        parent::delete($key);
+
+        $rootKey = $this->getRootKey($key);
+        if (strpos($key, '.') === false) {
+            $this->deleteData($rootKey);
+        } else {
+            $this->updateData($rootKey);
+        }
     }
 
     /**
@@ -33,37 +73,64 @@ class DbConfig extends Config
     protected function loadData()
     {
         $query = (new Query)->from($this->configTable);
+        $data = [];
         foreach ($query->all($this->db) as $row) {
-            $this->data[$row['name']] = unserialize($row['value']);
+            $data[$row['name']] = unserialize($row['value']);
         }
+
+        return $data;
     }
 
     /**
-     * @inheritdoc
-     */
-    protected function saveData($key)
-    {
-        $value = $this->get($key);
-        $command = $this->db->createCommand();
-        $condition = ['name' => $key];
-
-        if ($value === null) {
-            $command->update($this->configTable, ['value' => serialize($value)], $condition);
-        } else {
-            $command->delete($this->configTable, $condition);
-        }
-        $command->execute();
-    }
-
-    /**
-     * set single data
+     * Get configuration root key.
      *
      * @param $key
-     * @param $value
      * @return mixed
      */
-     protected function setData($key, $value)
-     {
+    protected function getRootKey($key)
+    {
+        return explode('.', $key)[0];
+    }
 
-     }
+    /**
+     * Insert new configuration value.
+     *
+     * @param $rootKey
+     */
+    protected function insertData($rootKey)
+    {
+        $this->db
+            ->createCommand()
+            ->insert($this->configTable, [
+                'name' => $rootKey,
+                'value' => serialize($this->get($rootKey))
+            ])
+            ->execute();
+    }
+
+    /**
+     * Update new configuration value.
+     *
+     * @param $rootKey
+     */
+    protected function updateData($rootKey)
+    {
+        $this->db
+            ->createCommand()
+            ->update($this->configTable, ['value' => serialize($this->get($rootKey))], ['name' => $rootKey])
+            ->execute();
+    }
+
+    /**
+     * Delete configuration value.
+     *
+     * @param $rootKey
+     */
+    protected function deleteData($rootKey)
+    {
+        $this->db
+            ->createCommand()
+            ->delete($this->configTable, ['name' => $rootKey])
+            ->execute();
+    }
 }

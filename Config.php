@@ -1,5 +1,5 @@
 <?php
-namespace callmez\config;
+namespace weyii\config;
 
 use yii\base\Component;
 use weyii\base\helpers\ArrayHelper;
@@ -8,7 +8,7 @@ use weyii\base\helpers\ArrayHelper;
  * Class Config
  * @package callmez\config
  */
-abstract class Config extends Component implements \ArrayAccess
+class Config extends Component implements \ArrayAccess
 {
     /**
      * All of the configuration data.
@@ -17,9 +17,17 @@ abstract class Config extends Component implements \ArrayAccess
      */
     protected $data = [];
 
-    public function init()
+    /**
+     * Create new configuration instance.
+     *
+     * @param array $data
+     * @param array $config
+     */
+    public function __construct(array $data = [], $config = [])
     {
-        $this->loadData();
+        $this->data = $data;
+
+        parent::__construct($config);
     }
 
     /**
@@ -59,8 +67,6 @@ abstract class Config extends Component implements \ArrayAccess
             }
         } else {
             ArrayHelper::set($this->data, $key, $value);
-
-            $this->saveData($key);
         }
     }
 
@@ -72,8 +78,6 @@ abstract class Config extends Component implements \ArrayAccess
     public function delete($key)
     {
         ArrayHelper::forget($this->data, $key);
-
-        $this->saveData($key);
     }
 
     /**
@@ -160,16 +164,13 @@ abstract class Config extends Component implements \ArrayAccess
     }
 
     /**
-     * Load configuration data
-     */
-    abstract protected function loadData();
-
-    /**
-     * Save data to storage
-     * Note if the change value of given key is null then should delete data;
+     * Get the root configuration key.
      *
      * @param $key
-     *
+     * @return string
      */
-    abstract protected function saveData($key);
+    protected function getRootKey($key)
+    {
+        return explode('.', $key)[0];
+    }
 }
