@@ -3,6 +3,7 @@ namespace weyii\config;
 
 use yii\base\Component;
 use weyii\base\helpers\ArrayHelper;
+use yii\base\InvalidConfigException;
 
 /**
  * Class Config
@@ -18,14 +19,18 @@ class Config extends Component implements \ArrayAccess
     protected $data = [];
 
     /**
-     * Create new configuration instance.
-     *
-     * @param array $data
-     * @param array $config
+     * @inheritdoc
      */
-    public function __construct(array $data = [], $config = [])
+    public function __construct($config = [])
     {
-        $this->data = $data;
+        if (array_key_exists('data', $config)) {
+            if (!is_array($config['data'])) {
+                throw new InvalidConfigException('The "data" property must be array.');
+            }
+
+            $this->data = $config['data'];
+            unset($config['data']);
+        }
 
         parent::__construct($config);
     }

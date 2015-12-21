@@ -24,9 +24,10 @@ class DbConfig extends Config
     public function init()
     {
         $this->db = Instance::ensure($this->db, Connection::className());
-        $this->data = array_merge($this->loadData(), $this->data);
-
         parent::init();
+
+        // Note the default data value will not store to database.
+        $this->data = array_merge($this->loadData(), $this->data);
     }
 
     /**
@@ -68,7 +69,7 @@ class DbConfig extends Config
     }
 
     /**
-     * load data
+     * @inheritdoc
      */
     protected function loadData()
     {
