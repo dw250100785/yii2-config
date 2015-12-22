@@ -26,7 +26,7 @@ class DbConfig extends Config
         $this->db = Instance::ensure($this->db, Connection::className());
         parent::init();
 
-        // Note the default data value will not store to database.
+        // Note the default configuration data value will not store to database.
         $this->data = array_merge($this->loadData(), $this->data);
     }
 
