@@ -7,7 +7,7 @@ use yii\db\Connection;
 
 /**
  * Class DbConfig
- * @package callmez\config
+ * @package weyii\config
  */
 class DbConfig extends Config
 {

@@ -7,7 +7,7 @@ use yii\base\InvalidConfigException;
 
 /**
  * Class Config
- * @package callmez\config
+ * @package weyii\config
  */
 class Config extends Component implements \ArrayAccess
 {
