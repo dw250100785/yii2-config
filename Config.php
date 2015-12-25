@@ -2,7 +2,7 @@
 namespace weyii\config;
 
 use yii\base\Component;
-use weyii\base\helpers\ArrayHelper;
+use weyii\base\helpers\Arr;
 use yii\base\InvalidConfigException;
 
 /**
@@ -43,7 +43,7 @@ class Config extends Component implements \ArrayAccess
      */
     public function has($key)
     {
-        return ArrayHelper::has($this->data, $key);
+        return Arr::has($this->data, $key);
     }
 
     /**
@@ -55,7 +55,7 @@ class Config extends Component implements \ArrayAccess
      */
     public function get($key, $default = null)
     {
-        return ArrayHelper::get($this->data, $key, $default);
+        return Arr::get($this->data, $key, $default);
     }
 
     /**
@@ -71,7 +71,7 @@ class Config extends Component implements \ArrayAccess
                 static::set($innerKey, $innerValue);
             }
         } else {
-            ArrayHelper::set($this->data, $key, $value);
+            Arr::set($this->data, $key, $value);
         }
     }
 
@@ -82,7 +82,7 @@ class Config extends Component implements \ArrayAccess
      */
     public function delete($key)
     {
-        ArrayHelper::forget($this->data, $key);
+        Arr::forget($this->data, $key);
     }
 
     /**
