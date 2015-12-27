@@ -1,6 +1,11 @@
 yii2-config
 ===========
 
+[![Build Status](https://img.shields.io/travis/weyii/yii2-config.svg?style=flat-square&branch=tests)](http://travis-ci.org/weyii/yii2-config)
+[![version](https://img.shields.io/packagist/v/weyii/yii2-config.svg?style=flat-square)](https://packagist.org/packages/weyii/yii2-config)
+[![Download](https://img.shields.io/packagist/dt/weyii/yii2-config.svg?style=flat-square)](https://packagist.org/packages/weyii/yii2-config)
+[![codecov.io](https://img.shields.io/codecov/c/github/weyii/yii2-config.svg?style=flat-square)](https://codecov.io/github/weyii/yii2-config)
+
 Thank you choice yii2-config, The config component for Yii2.
 
 Installation

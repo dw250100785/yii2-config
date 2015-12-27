@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="config">
+        <column>name</column>
+        <column>value</column>
+        <row>
+            <value>project</value>
+            <value>s:5:"weyii";</value>
+        </row>
+    </table>
+</dataset>
