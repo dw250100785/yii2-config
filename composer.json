@@ -23,5 +23,12 @@
     },
     "autoload": {
         "psr-4": {"weyii\\config\\": ""}
+    },
+    "autoload-dev": {
+        "psr-4": {"weyii\\tests\\": "tests"}
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.8.21",
+        "phpunit/dbunit": "~1.4.1"
     }
 }
