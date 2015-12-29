@@ -47,7 +47,7 @@ After that change your main configuration file ```config/web.php```
     'components' => [
         ...
         'config' => [
-            'class' => 'weyii\config\adapters\DbConfig',
+            'class' => 'weyii\config\DbConfig',
         ],
         ...
     ],
